@@ -49,10 +49,6 @@ for _,RGB in pairs(game:GetService("Workspace").Rainbow:GetChildren()) do
     table.insert(RainbowTable, RGB.Name)
 end
 
-for _,Island in pairs(game:GetService("Workspace").Island:GetChildren()) do
-    table.insert(IslandTable, Island.Name)
-end
-
 function teleportTO(placeCFrame)
     local plr = game.Players.LocalPlayer
     if plr.Character then
@@ -61,8 +57,8 @@ function teleportTO(placeCFrame)
 end
 
 function teleportworld(world)
-    if game:GetService("Workspace").Teleporters:FindFirstChild(world) then
-        teleportTO(game:GetService("Workspace").Island[world].CFrame)
+    if game:GetService("Workspace").Teleporter:FindFirstChild(world) then
+        teleportTO(game:GetService("Workspace").Teleport[world].CFrame)
     end
 end
 
@@ -147,7 +143,7 @@ end)
         Teleporter = value
     end)
     
-    P_2:CreateDropdown("Unlock Island", IslandTable, function(value)
+    P_2:CreateDropdown("Unlock Island", {"1"}, function(value)
         teleportworld(value)
     end)
 
