@@ -35,7 +35,7 @@ end
 
 local EggTable = {}
 local PetsTable = {}
-local RainbowTable = {}
+local BossTable = {}
 local IslandTable = {}
 
 for _,Egg in pairs(game:GetService("Workspace").Shops:GetChildren()) do
@@ -44,6 +44,10 @@ end
 
 for _,Island in pairs(game:GetService("Workspace").Islands:GetChildren()) do
     table.insert(IslandTable, Island.Name)
+end
+
+for _,Boss in pairs(game:GetService("Workspace").Bosses:GetChildren()) do
+    table.insert(BossTable, Boss.Name)
 end
 
 function teleportTO(placeCFrame)
@@ -85,6 +89,7 @@ local P_1 = ui:new("Farm")
 local P_2 = ui:new("Unlock World")
 local P_3 = ui:new("Farm Egg")
 local P_4 = ui:new("Auto Rebirth")
+local P_6 = ui:new("Boss farm")
 local P_5 = ui:new("Misc")
 
 P_1:Ping()
@@ -286,6 +291,15 @@ P_5:CreateToggle("Auto upgrade gem", false, function(v)
        while wait() do
            if ToggleGems == false then break end
        autoupgradegem()
+end
+end)
+
+P_6:CreateDropdown("Boss Farm", BossTable, function(value)
+    if game:GetService("Workspace").Bosses:FindFirstChild(value) then
+pos = CFrame.new(game:GetService("Workspace").Bosses[value].Position)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos
+else
+Notify("Boss Notification","Boss not found")
 end
 end)
 
