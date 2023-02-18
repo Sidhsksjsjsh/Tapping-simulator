@@ -42,6 +42,10 @@ for _,Egg in pairs(game:GetService("Workspace").Shops:GetChildren()) do
     table.insert(EggTable, Egg.Name)
 end
 
+for _,Island in pairs(game:GetService("Workspace").Islands:GetChildren()) do
+    table.insert(IslandTable, Island.Name)
+end
+
 function teleportTO(placeCFrame)
     local plr = game.Players.LocalPlayer
     if plr.Character then
@@ -49,9 +53,9 @@ function teleportTO(placeCFrame)
     end
 end
 
-function teleportworld(world)
-    if game:GetService("Workspace").Teleporter:FindFirstChild(world) then
-        teleportTO(game:GetService("Workspace").Teleport[world].CFrame)
+function teleportIsland(IslandTag)
+    if game:GetService("Workspace").Islands:FindFirstChild(IslandTag) then
+        teleportTO(game:GetService("Workspace").Islands[IslandTag].CFrame)
     end
 end
 
@@ -136,8 +140,8 @@ end)
         Teleporter = value
     end)
     
-    P_2:CreateDropdown("Unlock Island", {"1"}, function(value)
-        teleportworld(value)
+    P_2:CreateDropdown("Unlock Island", IslandTable, function(value)
+        teleportIsland(value)
     end)
 
     P_2:CreateButton("Teleport", function()
