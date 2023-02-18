@@ -34,7 +34,7 @@ sound:Play()
 end
 
 local EggTable = {}
-local PetsTable = {}
+local ZoneTable = {}
 local BossTable = {}
 local IslandTable = {}
 
@@ -48,6 +48,10 @@ end
 
 for _,Boss in pairs(game:GetService("Workspace").Bosses:GetChildren()) do
     table.insert(BossTable, Boss.Name)
+end
+
+for _,Zone in pairs(game:GetService("Workspace").Zones:GetChildren()) do
+    table.insert(ZoneTable, Zone.Name)
 end
 
 function teleportTO(placeCFrame)
@@ -145,8 +149,14 @@ end)
         Teleporter = value
     end)
     
+P_2:CreateDropdown("Unlock Island", ZoneTable, function(value)
+    local pos = CFrame.new(game:GetService("Workspace").Zones[value].Position)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos
+end)
+
     P_2:CreateDropdown("Unlock Island", IslandTable, function(value)
-        teleportIsland(value)
+            local pos = CFrame.new(game:GetService("Workspace").Islands[value].Position)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos
     end)
 
     P_2:CreateButton("Teleport", function()
