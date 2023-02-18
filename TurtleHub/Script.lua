@@ -41,13 +41,6 @@ local IslandTable = {}
 for _,Egg in pairs(game:GetService("Workspace").Shops:GetChildren()) do
     table.insert(EggTable, Egg.Name)
 end
-for _,Pets in pairs(game:GetService("Workspace").Pets:GetChildren()) do
-    table.insert(PetsTable, Pets.Name)
-end
-
-for _,RGB in pairs(game:GetService("Workspace").Rainbow:GetChildren()) do
-    table.insert(RainbowTable, RGB.Name)
-end
 
 function teleportTO(placeCFrame)
     local plr = game.Players.LocalPlayer
