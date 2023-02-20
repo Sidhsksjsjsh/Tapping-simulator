@@ -38,6 +38,15 @@ local ZoneTable = {}
 local BossTable = {}
 local IslandTable = {}
 
+function copy(_v_)
+      setclipboard(_v_)
+end
+
+function tp(_table_)
+     local pos = _table_
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
+end
+
 for _,Egg in pairs(game:GetService("Workspace").Shops:GetChildren()) do
     table.insert(EggTable, Egg.Name)
 end
@@ -149,14 +158,19 @@ end)
         Teleporter = value
     end)
     
-P_2:CreateDropdown("Unlock Island", ZoneTable, function(value)
+P_2:CreateDropdown("Teleport zone", ZoneTable, function(value)
     local pos = CFrame.new(game:GetService("Workspace").Zones[value].Position)
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos
 end)
 
-    P_2:CreateDropdown("Unlock Island", IslandTable, function(value)
-            local pos = CFrame.new(game:GetService("Workspace").Islands[value].Position)
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos
+    P_2:CreateDropdown("Teleport island", IslandTable, function(value)
+            local pos = game:GetService("Workspace").Islands[value].Position
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
+    end)
+
+    P_2:CreateDropdown("Copy island coordinate", IslandTable, function(value)
+            local pos = game:GetService("Workspace").Islands[value].Position
+            copy(pos)
     end)
 
     P_2:CreateButton("Teleport", function()
@@ -323,6 +337,10 @@ end)
 
 P_5:CreateButton("Psy Hub", function()
 loadstring(game:GetObjects("rbxassetid://3014051754")[1].Source)()
+end)
+
+P_5:CreateBox("Teleport to coordinate", "0,0,0", function(_)
+ tp(_)
 end)
 
 local Players = game.Players
