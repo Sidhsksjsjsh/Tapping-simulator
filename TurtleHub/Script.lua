@@ -165,7 +165,10 @@ end)
 
     P_2:CreateDropdown("Teleport island", IslandTable, function(value)
             local pos = game:GetService("Workspace").Islands[value].Position
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
+local TeleportService = {
+         [1] = CFrame.new(pos)        
+}
+game:GetService("ReplicatedStorage").Events.Teleport:FireServer(unpack(TeleportService))
     end)
 
     P_2:CreateDropdown("Copy island coordinate", IslandTable, function(value)
@@ -340,7 +343,10 @@ loadstring(game:GetObjects("rbxassetid://3014051754")[1].Source)()
 end)
 
 P_5:CreateBox("Teleport to coordinate", "0,0,0", function(_)
- tp(_)
+ local TeleportService = {
+         [1] = CFrame.new(_)        
+}
+game:GetService("ReplicatedStorage").Events.Teleport:FireServer(unpack(TeleportService))
 end)
 
 local Players = game.Players
